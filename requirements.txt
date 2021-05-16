@@ -1,0 +1,5 @@
+greenlet==1.1.0
+prettytable==2.1.0
+PyYAML==5.4.1
+SQLAlchemy==1.4.15
+wcwidth==0.2.5
