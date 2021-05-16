@@ -12,7 +12,7 @@ def config():
     return __config
 
 
-def config(exists_db: bool):
+def set_config(exists_db: bool):
     global __config
     __config = None
     with open('config.yaml', mode='w') as stream:

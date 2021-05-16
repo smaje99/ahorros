@@ -1,16 +1,19 @@
-import common
-from fee import Fee
-from database import Database
+from typing import Iterator
 
-db = Database()
+from common import config, set_config
+from fee import Fee
+from database import DataBase
+
+db = DataBase()
 
 
 def main():
     while True:
         x = input('''Sistema de Ahorro
-          1. Crear base de datos
-          2. Estadísticas
-          0. Salir''')
+        1. Crear base de datos
+        2. Estadísticas
+        0. Salir
+> ''')
         if x == '1':
             pass
         elif x == '2':

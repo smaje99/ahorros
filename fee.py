@@ -10,6 +10,6 @@ class Fee(Base):
                 primary_key=True,
                 unique=True,
                 nullable=False,
-                sqlite_autoincrement=True)
+                autoincrement=True)
     value = Column(Integer, unique=True, nullable=False)
     check = Column(Boolean, nullable=False, default=False)
