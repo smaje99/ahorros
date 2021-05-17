@@ -55,7 +55,12 @@ class DataBase:
         return result if result else 0
 
     def fees_checked(self) -> int:
-        pass
+        session = Session()
+        result = (session.query(Fee)
+                        .filter(Fee.check)
+                        .count())
+        session.close()
+        return result
 
     def fees_not_checked(self) -> int:
         pass
