@@ -1,5 +1,7 @@
 from typing import List
 
+from sqlalchemy.sql import func
+
 from base import Base, engine, Session
 from fee import Fee
 
@@ -35,3 +37,15 @@ class DataBase:
             .update({Fee.check: check}))
         session.commit()
         session.close()
+
+    def saved_money(self) -> int:
+        pass
+
+    def missing_money(self) -> int:
+        pass
+
+    def fees_checked(self) -> int:
+        pass
+
+    def fees_not_checked(self) -> int:
+        pass
