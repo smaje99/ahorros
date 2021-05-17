@@ -1,5 +1,7 @@
 from typing import Iterator
 
+from prettytable import PrettyTable
+
 from common import config, set_config
 from fee import Fee
 from database import DataBase
@@ -21,3 +23,9 @@ def load_db():
 
 def exists_db() -> bool:
     return config()['exists_db']
+
+
+def money_statistics() -> str:
+    money = PrettyTable(['Ahorrado', 'Faltante'])
+    money.add_row([db.saved_money(), db.missing_money()])
+    return money.get_string(title='Dinero')

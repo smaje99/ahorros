@@ -15,7 +15,7 @@ def main():
             else:
                 print('La base de datos ya ha sido creada con anterioridad')
         elif x == '2':
-            pass
+            print(fd.money_statistics())
         elif x == '0':
             print('Cerrando aplicación...')
             break
