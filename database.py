@@ -47,7 +47,12 @@ class DataBase:
         return result if result else 0
 
     def missing_money(self) -> int:
-        pass
+        session = Session()
+        result = (session.query(func.sum(Fee.value))
+                        .filter(Fee.check == False)
+                        .one()[0])
+        session.close()
+        return result if result else 0
 
     def fees_checked(self) -> int:
         pass
