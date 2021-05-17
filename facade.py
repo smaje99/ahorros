@@ -9,6 +9,10 @@ from database import DataBase
 
 db = DataBase()
 
+dollar_millon = lambda value: f'$ {value:6,.0f}'.replace(',', '.')
+
+dollar_thousand = lambda value: f'$ {value:5,.0f}'.replace(',', '.')
+
 
 def _get_fee_values() -> Iterator[Fee]:
     for value in range(50, 10_050, 50):
@@ -27,7 +31,8 @@ def exists_db() -> bool:
 
 def money_statistics() -> str:
     money = PrettyTable(['Ahorrado', 'Faltante'])
-    money.add_row([db.saved_money(), db.missing_money()])
+    money.add_row([dollar_millon(db.saved_money()),
+                   dollar_millon(db.missing_money())])
     return money.get_string(title='Dinero')
 
 
