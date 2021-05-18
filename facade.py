@@ -73,10 +73,9 @@ def savings_table() -> str:
                          'Domingo'])
     color = lambda check: Fore.GREEN if check else Fore.RED
     values = map(
-        lambda fee: f'{color(fee.check)} {fee.id:3}: {dollar(fee.value)}',
+        lambda fee: f'{color(fee.check)} {fee.id:3}: {dollar(fee.value)}{Fore.RESET}',
         db.get_fees()
     )
-
     for week in zip_longest(*[iter(values)]*7, fillvalue='     $     -'):
         table.add_row(week)
     return table.get_string(title='Tabla de Ahorros')
