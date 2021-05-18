@@ -20,19 +20,20 @@ def main():
             print(fd.fees_statistics())
         elif x == '3':
             while True:
-                x = input('1. Ver tabla' + \
-                    '2. Registrar cuota' + \
-                    '3. Eliminar cuota' + \
-                    '0. Salir' + \
+                x = input('1. Ver tabla\n' + \
+                    '2. Registrar cuota\n' + \
+                    '3. Eliminar cuota\n' + \
+                    '0. Salir\n' + \
                     '>')
                 if x == '1':
-                    pass
+                    print(fd.savings_table(), end='\n' * 2)
                 elif x == '2':
                     pass
                 elif x == '3':
                     pass
                 elif x == '0':
                     print('Saliendo del registro de cuotas', end='\n' * 2)
+                    break
                 else:
                     print('Opción desconocida')
         elif x == '0':
