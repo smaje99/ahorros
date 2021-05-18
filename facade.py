@@ -65,3 +65,7 @@ def savings_table() -> str:
 
 def check_fee(id: int) -> bool:
     return db.get_fee(id).check
+
+
+def register_fee(id: int, check: bool):
+    db.update_fee_check(id, check)
