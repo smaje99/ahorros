@@ -28,7 +28,12 @@ def main():
                 if x == '1':
                     print(fd.savings_table(), end='\n' * 2)
                 elif x == '2':
-                    pass
+                    id = int(input('Id de la cuota: '))
+                    if not fd.check_fee():
+                        fd.register_fee(id, True)
+                        print('Cuota registrada exitosamente', end='\n' * 2)
+                    else:
+                        print('Es cuota ya está registrada', end='\n' * 2)
                 elif x == '3':
                     pass
                 elif x == '0':
