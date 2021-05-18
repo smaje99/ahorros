@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Boolean
+from sqlalchemy import Column, Integer, Boolean, String
 
 from base import Base
 
@@ -13,3 +13,4 @@ class Fee(Base):
                 autoincrement=True)
     value = Column(Integer, unique=True, nullable=False)
     check = Column(Boolean, nullable=False, default=False)
+    figure = Column(String(1), nullable=True)
