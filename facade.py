@@ -61,3 +61,7 @@ def savings_table() -> str:
     for week in zip_longest(*[iter(values)]*7, fillvalue='     $     -'):
         table.add_row(week)
     return table.get_string(title='Tabla de Ahorros')
+
+
+def check_fee(id: int) -> bool:
+    return db.get_fee(id).check
