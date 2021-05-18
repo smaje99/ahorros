@@ -43,7 +43,14 @@ def main():
                         print('Es cuota ya está registrada', end='\n' * 2)
                 elif x == '3':
                     id = int(input('Id de la cuota: '))
-                    if fd.check_fee():
+                    if fd.check_fee(id):
+                        if fd.has_figure(id):
+                            x = input('Esta cuota tiene una bandera ' + \
+                                '¿Está seguro de eliminarla? (s/n): ') \
+                                    .trim() \
+                                    .lower()
+                            if x == 'n' or x != 's':
+                                continue
                         fd.register_fee(id, False)
                         print('Cuota eliminada exitosamente', end='\n' * 2)
                     else:
