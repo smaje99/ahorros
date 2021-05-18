@@ -35,7 +35,12 @@ def main():
                     else:
                         print('Es cuota ya está registrada', end='\n' * 2)
                 elif x == '3':
-                    pass
+                    id = int(input('Id de la cuota: '))
+                    if fd.check_fee():
+                        fd.register_fee(id, False)
+                        print('Cuota eliminada exitosamente', end='\n' * 2)
+                    else:
+                        print('Es cuota no está registrada', end='\n' * 2)
                 elif x == '0':
                     print('Saliendo del registro de cuotas', end='\n' * 2)
                     break
