@@ -17,14 +17,14 @@ def main():
                 print('La base de datos ya ha sido creada con anterioridad')
         elif x == '2':
             print(fd.money_statistics(), end='\n' * 2)
-            print(fd.fees_statistics())
+            print(fd.fees_statistics(), end='\n' * 2)
         elif x == '3':
             while True:
                 x = input('1. Ver tabla\n' + \
                     '2. Registrar cuota\n' + \
                     '3. Eliminar cuota\n' + \
                     '0. Salir\n' + \
-                    '>')
+                    '> ')
                 if x == '1':
                     print(fd.savings_table(), end='\n' * 2)
                 elif x == '2':
@@ -33,7 +33,7 @@ def main():
                         if fd.has_figure(id):
                             x = input('Esta cuota tiene una bandera ' + \
                                 '¿Está seguro de registrarla? (s/n): ') \
-                                    .trim() \
+                                    .strip() \
                                     .lower()
                             if x == 'n' or x != 's':
                                 continue
@@ -47,9 +47,10 @@ def main():
                         if fd.has_figure(id):
                             x = input('Esta cuota tiene una bandera ' + \
                                 '¿Está seguro de eliminarla? (s/n): ') \
-                                    .trim() \
+                                    .strip() \
                                     .lower()
                             if x == 'n' or x != 's':
+                                print()
                                 continue
                         fd.register_fee(id, False)
                         print('Cuota eliminada exitosamente', end='\n' * 2)
