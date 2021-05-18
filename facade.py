@@ -87,3 +87,7 @@ def check_fee(id: int) -> bool:
 
 def register_fee(id: int, check: bool):
     db.update_fee_check(id, check)
+
+
+def has_figure(id: int) -> bool:
+    return bool(db.get_fee(id).figure)

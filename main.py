@@ -29,7 +29,14 @@ def main():
                     print(fd.savings_table(), end='\n' * 2)
                 elif x == '2':
                     id = int(input('Id de la cuota: '))
-                    if not fd.check_fee():
+                    if not fd.check_fee(id):
+                        if fd.has_figure(id):
+                            x = input('Esta cuota tiene una bandera ' + \
+                                '¿Está seguro de registrarla? (s/n): ') \
+                                    .trim() \
+                                    .lower()
+                            if x == 'n' or x != 's':
+                                continue
                         fd.register_fee(id, True)
                         print('Cuota registrada exitosamente', end='\n' * 2)
                     else:
