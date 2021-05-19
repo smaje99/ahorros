@@ -1,4 +1,10 @@
+from colorama import init, Fore
+
 import facade as fd
+
+
+init(autoreset=True)
+
 
 def main():
     while True:
@@ -12,9 +18,9 @@ def main():
             if not fd.exists_db():
                 print('Cargando base de datos...')
                 fd.load_db()
-                print('La base de datos ha sido creada y cargada')
+                print(Fore.GREEN + 'La base de datos ha sido creada y cargada', end='\n' * 2)
             else:
-                print('La base de datos ya ha sido creada con anterioridad')
+                print(Fore.RED + 'La base de datos ya ha sido creada con anterioridad', end='\n' * 2)
         elif x == '2':
             print(fd.money_statistics(), end='\n' * 2)
             print(fd.fees_statistics(), end='\n' * 2)
@@ -38,9 +44,9 @@ def main():
                             if x == 'n' or x != 's':
                                 continue
                         fd.register_fee(id, True)
-                        print('Cuota registrada exitosamente', end='\n' * 2)
+                        print(Fore.GREEN + 'Cuota registrada exitosamente', end='\n' * 2)
                     else:
-                        print('Es cuota ya está registrada', end='\n' * 2)
+                        print(Fore.RED + 'La cuota ya está registrada', end='\n' * 2)
                 elif x == '3':
                     id = int(input('Id de la cuota: '))
                     if fd.check_fee(id):
@@ -53,19 +59,19 @@ def main():
                                 print()
                                 continue
                         fd.register_fee(id, False)
-                        print('Cuota eliminada exitosamente', end='\n' * 2)
+                        print(Fore.GREEN + 'Cuota eliminada exitosamente', end='\n' * 2)
                     else:
-                        print('Es cuota no está registrada', end='\n' * 2)
+                        print(Fore.RED + 'La cuota no está registrada', end='\n' * 2)
                 elif x == '0':
                     print('Saliendo del registro de cuotas', end='\n' * 2)
                     break
                 else:
-                    print('Opción desconocida')
+                    print(Fore.RED + 'Opción desconocida', end='\n' * 2)
         elif x == '0':
             print('Cerrando aplicación...')
             break
         else:
-            print('Opción desconocida')
+            print(Fore.RED + 'Opción desconocida', end='\n' * 2)
 
 
 if __name__ == '__main__':

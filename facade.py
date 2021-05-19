@@ -2,7 +2,7 @@ from typing import Iterator
 from itertools import zip_longest
 
 from prettytable import PrettyTable
-from colorama import Fore, init
+from colorama import Fore
 
 from common import config, set_config
 from fee import Fee
@@ -10,8 +10,6 @@ from database import DataBase
 
 
 db = DataBase()
-
-init(autoreset=True)
 
 dollar = lambda value: f'$ {value:6,.0f}'.replace(',', '.')
 
