@@ -4,6 +4,9 @@ from base import Base
 
 
 class Fee(Base):
+    '''Representación de la tabla fee
+    en la base de datos ahorros
+    '''
     __tablename__ ='fee'
 
     id = Column(Integer,
