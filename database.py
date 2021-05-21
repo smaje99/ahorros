@@ -91,3 +91,19 @@ class DataBase:
                             .filter(Fee.check == check)
                             .count())
         return result
+
+    def fees_with_figure(self, figure: str) -> List[Fee]:
+        '''Listado de cuotas que comparten
+        una bandera en especifica
+
+        Args:
+            figure (str): bandera
+
+        Returns:
+            List[Fee]: listado de las cuotas
+        '''
+        with session_reading() as session:
+            result = (session.query(Fee)
+                            .filter(Fee.figure == figure)
+                            .all())
+        return result
