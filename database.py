@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from typing import List
 
 from sqlalchemy.sql import func
@@ -9,6 +10,41 @@ from fee import Fee
 class DataBase:
     def __init__(self):
         Base.metadata.create_all(engine)
+
+    @contextmanager
+    def __session_reading(self):
+        '''Proporciona un alcance transaccional en
+        torno a una serie de operaciones para lectura
+
+        Yields:
+            Session: serie de operaciones para lectura
+        '''
+        session = Session()
+        try:
+            yield session
+        except:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+
+    @contextmanager
+    def __session_writing(self):
+        '''Proporciona un alcance transaccional en
+        torno a una serie de operaciones para escritura
+
+        Yields:
+            Session: serie de operaciones para escritura
+        '''
+        session = Session()
+        try:
+            yield session
+            session.commit()
+        except:
+            session.rollback()
+            raise
+        finally:
+            session.close()
 
     def add_fee(self, fee: Fee):
         session = Session()
