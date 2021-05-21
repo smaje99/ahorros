@@ -76,16 +76,18 @@ class DataBase:
                             .one()[0])
         return result if result else 0
 
-    def fees_checked(self) -> int:
-        with session_reading() as session:
-            result = (session.query(Fee)
-                            .filter(Fee.check)
-                            .count())
-        return result
+    def fees_checked(self, check: bool) -> int:
+        '''Cantidad de cuotas pagadas o faltantes
+        registradas en la base de datos
 
-    def fees_not_checked(self) -> int:
+        Args:
+            check (bool): True: cuotas pagadas | False: cuotas faltantes
+
+        Returns:
+            int: cantidad de las cuotas correspondiente
+        '''
         with session_reading() as session:
             result = (session.query(Fee)
-                            .filter(Fee.check == False)
+                            .filter(Fee.check == check)
                             .count())
         return result

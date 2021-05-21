@@ -57,7 +57,8 @@ def money_statistics() -> str:
 
 def fees_statistics() -> str:
     fees = PrettyTable(['Pagadas', 'Faltantes'])
-    fees.add_row([db.fees_checked(), db.fees_not_checked()])
+    fees.add_row([db.fees_checked(True),
+                  db.fees_checked(False)])
     return fees.get_string(title='Cuotas')
 
 
