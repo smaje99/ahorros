@@ -16,13 +16,15 @@ class DataBase:
 
     def get_fee(self, id: int) -> Fee:
         with session_reading() as session:
-            return (session.query(Fee)
+            result = (session.query(Fee)
                         .filter(Fee.id == id)
                         .first())
+        return result
 
     def get_fees(self) -> List[Fee]:
         with session_reading() as session:
-            return session.query(Fee).all()
+            result = session.query(Fee).all()
+        return result
 
     def update_fee_check(self, id: int, check: bool):
         with session_writing() as session:
@@ -35,23 +37,25 @@ class DataBase:
             result = (session.query(func.sum(Fee.value))
                             .filter(Fee.check)
                             .one()[0])
-            return result if result else 0
+        return result if result else 0
 
     def missing_money(self) -> int:
         with session_reading() as session:
             result = (session.query(func.sum(Fee.value))
                             .filter(Fee.check == False)
                             .one()[0])
-            return result if result else 0
+        return result if result else 0
 
     def fees_checked(self) -> int:
         with session_reading() as session:
-            return (session.query(Fee)
+            result = (session.query(Fee)
                             .filter(Fee.check)
                             .count())
+        return result
 
     def fees_not_checked(self) -> int:
         with session_reading() as session:
-            return (session.query(Fee)
+            result = (session.query(Fee)
                             .filter(Fee.check == False)
                             .count())
+        return result
