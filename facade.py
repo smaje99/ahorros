@@ -14,13 +14,6 @@ db = DataBase()
 # Formateo dolar a un número
 dollar = lambda value: f'$ {value:6,.0f}'.replace(',', '.')
 
-# Valores según la bandera
-values_figure = {'c': 20_000,
-                 'r': 40_000,
-                 'm': 60_000,
-                 's': 80_000,
-                 't': 100_000}
-
 
 def _get_fee_values() -> Iterator[Fee]:
     '''Genera los valores de las cuotas

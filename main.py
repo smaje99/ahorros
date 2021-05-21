@@ -29,6 +29,7 @@ def main():
                 x = input('1. Ver tabla\n' + \
                     '2. Registrar cuota\n' + \
                     '3. Eliminar cuota\n' + \
+                    '4. Pagar una bandera\n' + \
                     '0. Salir\n' + \
                     '> ')
                 if x == '1':
@@ -62,6 +63,22 @@ def main():
                         print(Fore.GREEN + 'Cuota eliminada exitosamente', end='\n' * 2)
                     else:
                         print(Fore.RED + 'La cuota no está registrada', end='\n' * 2)
+                elif x == '4':
+                    x = input('c. $  20.000\n' + \
+                        'r. $  40.000\n' + \
+                        'm. $  60.000\n' + \
+                        's. $  80.000\n' + \
+                        't. $ 100.000\n' + \
+                        '0. Salir\n'
+                        '> ') \
+                            .strip() \
+                            .lower()
+                    if x in ['c', 'r', 'm', 's', 't']:
+                        pass
+                    elif x == '0':
+                        print('Saliendo del pago de banderas...', end='\n' * 2)
+                    else:
+                        print(Fore.RED + 'Opción desconocida', end='\n' * 2)
                 elif x == '0':
                     print('Saliendo del registro de cuotas', end='\n' * 2)
                     break
