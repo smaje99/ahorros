@@ -11,8 +11,10 @@ from database import DataBase
 
 db = DataBase()
 
+# Formateo dolar a un número
 dollar = lambda value: f'$ {value:6,.0f}'.replace(',', '.')
 
+# Valores según la bandera
 values_figure = {'c': 20_000,
                  'r': 40_000,
                  'm': 60_000,
@@ -21,11 +23,23 @@ values_figure = {'c': 20_000,
 
 
 def _get_fee_values() -> Iterator[Fee]:
+    '''Genera los valores de las cuotas
+    para la base de datos
+
+    Yields:
+        Iterator[Fee]: valores de las cuotas
+    '''
     for value in range(50, 10_050, 50):
         yield Fee(value=value)
 
 
 def _add_figure(fee: Fee):
+    '''Añade una bandera a la cuota
+    según su valor
+
+    Args:
+        fee (Fee): cuota a añadir la bandera
+    '''
     figures = {'c': [250, 500, 850, 1150, 1450, 1750, 2050, 2250, 2650, 3150, 3950],
                'r': [50, 300, 1600, 1950, 2350, 2550, 2850, 3300, 3450, 3750, 4050, 4250, 4650, 4900],
                'm': [950, 1550, 3000, 3550, 4350, 5150, 5450, 5650, 5750, 5950, 6050, 6250, 6350],
@@ -38,6 +52,9 @@ def _add_figure(fee: Fee):
 
 
 def load_db():
+    '''Carga las cuotas en la base de datos
+    y configura la creación de la misma
+    '''
     for fee in _get_fee_values():
         _add_figure(fee)
         db.add_fee(fee)
@@ -45,10 +62,20 @@ def load_db():
 
 
 def exists_db() -> bool:
+    '''Confirma la existencia de la base de datos
+
+    Returns:
+        bool: existencia de la base de datos
+    '''
     return config()['exists_db']
 
 
 def money_statistics() -> str:
+    '''Estadísticas del dinero existente
+
+    Returns:
+        str: tabla de comparación del dinero ahorrado y faltante
+    '''
     money = PrettyTable(['Ahorrado', 'Faltante'])
     money.add_row([dollar(db.money(True)),
                    dollar(db.money(False))])
@@ -56,6 +83,11 @@ def money_statistics() -> str:
 
 
 def fees_statistics() -> str:
+    '''Estadísticas de las cuotas existentes
+
+    Returns:
+        str: tabla de comparación de las cuotas ahorradas y faltantes
+    '''
     fees = PrettyTable(['Pagadas', 'Faltantes'])
     fees.add_row([db.fees_checked(True),
                   db.fees_checked(False)])
@@ -63,6 +95,12 @@ def fees_statistics() -> str:
 
 
 def savings_table() -> str:
+    '''Tabla de las cuotas en la base de datos
+    con su identificación y comprobación de pago
+
+    Returns:
+        str: tabla de cuotas
+    '''
     table = PrettyTable(['Lunes',
                          'Martes',
                          'Miércoles',
@@ -81,12 +119,35 @@ def savings_table() -> str:
 
 
 def check_fee(id: int) -> bool:
+    '''Comprueba si una cuota está pagada
+    o en estado faltante
+
+    Args:
+        id (int): cuota a comprobar
+
+    Returns:
+        bool: estado de la cuota
+    '''
     return db.get_fee(id).check
 
 
 def register_fee(id: int, check: bool):
+    '''Registra el pago o el despago de una cuota est
+
+    Args:
+        id (int): cuota a registrar
+        check (bool): estado a registrar de la cuota
+    '''
     db.update_fee_check(id, check)
 
 
 def has_figure(id: int) -> bool:
+    '''Comprueba si una cuota tiene una bandera
+
+    Args:
+        id (int): cuota a comprobar
+
+    Returns:
+        bool: comprobación de bandera
+    '''
     return bool(db.get_fee(id).figure)
