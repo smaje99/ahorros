@@ -32,17 +32,10 @@ class DataBase:
                 .filter(Fee.id == id)
                 .update({Fee.check: check}))
 
-    def saved_money(self) -> int:
+    def money(self, saved: bool) -> int:
         with session_reading() as session:
             result = (session.query(func.sum(Fee.value))
-                            .filter(Fee.check)
-                            .one()[0])
-        return result if result else 0
-
-    def missing_money(self) -> int:
-        with session_reading() as session:
-            result = (session.query(func.sum(Fee.value))
-                            .filter(Fee.check == False)
+                            .filter(Fee.check == saved)
                             .one()[0])
         return result if result else 0
 

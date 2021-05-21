@@ -50,8 +50,8 @@ def exists_db() -> bool:
 
 def money_statistics() -> str:
     money = PrettyTable(['Ahorrado', 'Faltante'])
-    money.add_row([dollar(db.saved_money()),
-                   dollar(db.missing_money())])
+    money.add_row([dollar(db.money(True)),
+                   dollar(db.money(False))])
     return money.get_string(title='Dinero')
 
 
