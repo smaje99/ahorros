@@ -151,3 +151,20 @@ def has_figure(id: int) -> bool:
         bool: comprobación de bandera
     '''
     return bool(db.get_fee(id).figure)
+
+
+def pay_figure(figure: str) -> int:
+    '''Pagar cuotas especificas con una
+    determinada bandera
+
+    Args:
+        figure (str): bandera
+
+    Returns:
+        int: resto del pago
+    '''
+    rest = 0
+    for fee in db.fees_with_figure(figure):
+        if fee.check: rest += fee.value
+        else: db.update_fee_check(fee.id, True)
+    return rest
