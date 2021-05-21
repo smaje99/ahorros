@@ -74,7 +74,9 @@ def main():
                             .strip() \
                             .lower()
                     if x in ['c', 'r', 'm', 's', 't']:
-                        pass
+                        rest = fd.pay_figure(x)
+                        print(Fore.GREEN + f'Bandera {x} pagada', end='\n' if rest else '\n' * 2)
+                        if rest: print(f'Dinero restante: {fd.dollar(rest)}', end='\n' * 2)
                     elif x == '0':
                         print('Saliendo del pago de banderas...', end='\n' * 2)
                     else:
