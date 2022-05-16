@@ -11,7 +11,7 @@ from database import DataBase
 
 db = DataBase()
 
-# Formateo dolar a un número
+# Formateo dólar a un número
 dollar = lambda value: f'$ {value:6,.0f}'.replace(',', '.')
 
 
@@ -52,6 +52,13 @@ def load_db():
         _add_figure(fee)
         db.add_fee(fee)
     set_config(True)
+
+
+def remove_db():
+    '''Remueve la base de datos actual
+    '''
+    db.delete_fees()
+    set_config(False)
 
 
 def exists_db() -> bool:

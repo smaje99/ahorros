@@ -107,3 +107,10 @@ class DataBase:
                             .filter(Fee.figure == figure)
                             .all())
         return result
+
+    def delete_fees(self):
+        '''Remueve todos los registros de la cuotas pagadas
+        '''
+        with session_writing() as session:
+            (session.query(Fee)
+                .delete(synchronize_session=False))

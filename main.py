@@ -21,6 +21,12 @@ def main():
                 print(Fore.GREEN + 'La base de datos ha sido creada y cargada', end='\n' * 2)
             else:
                 print(Fore.RED + 'La base de datos ya ha sido creada con anterioridad', end='\n' * 2)
+                reset = input('¿Quieres resetear la base de datos existente? (y/n)\n>').lower()
+                if reset == 'y':
+                    print('Reseteando la base de datos existente..')
+                    fd.remove_db()
+                    fd.load_db()
+                    print(Fore.GREEN + 'La base de datos ha sido creada y cargada', end='\n' * 2)
         elif x == '2':
             print(fd.money_statistics(), end='\n' * 2)
             print(fd.fees_statistics(), end='\n' * 2)
